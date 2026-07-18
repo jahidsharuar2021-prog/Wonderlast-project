@@ -4,11 +4,11 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <div>
-      <nav className="flex justify-between max-w-7xl mx-auto bg-white py-5">
-        <ul className="flex  gap-3">
-          <li>
+      <nav className="flex justify-between max-w-7xl mx-auto bg-white py-5 ">
+        <ul className="flex items-center gap-3">
+          <li className="text-cyan-500 py-2 px-4">
             {" "}
-            <Link href={""}>Homepage</Link>{" "}
+            <Link href={""}>Home</Link>{" "}
           </li>
           <li>
             {" "}
@@ -21,6 +21,10 @@ const Navbar = () => {
           <li>
             {" "}
             <Link href={"/admin"}>Admin</Link>{" "}
+          </li>
+          <li>
+            {" "}
+            <Link href={"/add-destination"}>Add Destination</Link>{" "}
           </li>
         </ul>
 

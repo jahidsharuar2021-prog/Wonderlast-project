@@ -2,6 +2,7 @@
 "use client"
 
 import { FieldError, Input, Label, ListBox, TextField,Select, TextArea, Button, Card } from "@heroui/react";
+import { toast } from "react-toastify";
 
 const AddDestinationPage = () => {
 
@@ -9,7 +10,7 @@ const AddDestinationPage = () => {
     e.preventDefault()
     const formData=new FormData(e.currentTarget)
     const destination=Object.fromEntries(formData.entries())
-    console.log(destination);
+    // console.log(destination);
 
      const res=await fetch("http://localhost:5000/destination",{
         method:'POST',
@@ -20,7 +21,7 @@ const AddDestinationPage = () => {
     });
 
     const data= await res.json()
-   alert("data is added..!")
+    toast.success("data is added..!")
  }
 
     return (

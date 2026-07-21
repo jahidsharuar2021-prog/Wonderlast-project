@@ -5,7 +5,7 @@ const DestinationPage = async() => {
 
     const res = await fetch("http://localhost:5000/destination",{cache:"no-store"})
    const destinations=await res.json()
-   console.log(destinations);
+//    console.log(destinations);
     return (
         <div className="max-w-7xl mx-auto">
             <h1>All Destinations</h1>

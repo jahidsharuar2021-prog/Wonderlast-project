@@ -1,7 +1,21 @@
+"use client"
+
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
-
 const Navbar = () => {
+
+    const {
+      data: session,      
+    } = authClient.useSession(); 
+    const user=session?.user
+    // console.log(user);
+
+    const handleSignOut=async()=>{
+      await authClient.signOut();
+    }
+
   return (
     <div>
       <nav className="flex justify-between max-w-7xl mx-auto bg-white py-5 ">
@@ -16,7 +30,7 @@ const Navbar = () => {
           </li>
           <li>
             {" "}
-            <Link href={"/my-booking"}>My-Bookings</Link>{" "}
+            <Link href={"/my-bookings"}>My-Bookings</Link>{" "}
           </li>
           <li>
             {" "}
@@ -37,19 +51,45 @@ const Navbar = () => {
           ></Image>
         </div>
 
-        <ul className="flex  gap-3">
+        <ul className="flex items-center gap-3">
           <li>
             {" "}
             <Link href={"/profile"}>Profile</Link>{" "}
           </li>
-          <li>
-            {" "}
-            <Link href={"/login"}>Login</Link>{" "}
-          </li>
-          <li>
-            {" "}
-            <Link href={"/signup"}>Sign Up</Link>{" "}
-          </li>
+
+          {user ? (
+            <>
+              <div className="flex items-center gap-2">
+                <li>
+                  {" "}
+                  <Avatar>
+                    <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
+                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
+                </li>
+                <li>
+                  <Button
+                    onClick={handleSignOut}
+                    variant="danger"
+                    className={"rounded-none"}
+                  >
+                    Logout
+                  </Button>
+                </li>
+              </div>
+            </>
+          ) : (
+            <>
+              <li>
+                {" "}
+                <Link href={"/login"}>Login</Link>{" "}
+              </li>
+              <li>
+                {" "}
+                <Link href={"/signup"}>Sign Up</Link>{" "}
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </div>

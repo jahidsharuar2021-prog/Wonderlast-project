@@ -33,7 +33,7 @@ export function EditModal ({destination}) {
     });
 
     const data = await res.json();
-    console.log(data)
+   window.location.reload()
     alert("data is added..!");
   };
 

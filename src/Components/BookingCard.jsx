@@ -11,7 +11,7 @@ const BookingCard = ({destination}) => {
         data: session,   
       } = authClient.useSession(); 
       const user=session?.user
-      console.log(user);
+      // console.log(user);
 
   const[departureDate,setDepartureDate]=useState(null);
   

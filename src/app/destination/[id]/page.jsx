@@ -1,7 +1,10 @@
 import BookingCard from "@/Components/BookingCard";
 import { DeleteAlert } from "@/Components/DeleteAlert";
 import { EditModal } from "@/Components/EditModal";
+import { auth } from "@/lib/auth";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
+import { headers } from "next/headers";
 import Image from "next/image";
 import { BiEdit } from "react-icons/bi";
 import { FiMapPin } from "react-icons/fi";
@@ -10,8 +13,19 @@ import { LuCalendarDays } from "react-icons/lu";
 
 const DestinationDetailsPage = async({params}) => {
     const {id}=await params;
+    const token=await auth.api.getToken({
+      headers:await headers()
+    
+    })
+    console.log(token)
      
-      const res = await fetch(`http://localhost:5000/destination/${id}`);
+      const res = await fetch(`http://localhost:5000/destination/${id}`,
+        {
+          headers:{
+            authorization:`Bearer ${token.token}`
+          }
+        }
+      );
       const destination= await res.json() 
       const {
         description,

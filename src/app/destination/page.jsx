@@ -3,7 +3,7 @@ import DestinationCard from "@/Components/DestinationCard";
 
 const DestinationPage = async() => {
 
-    const res = await fetch("http://localhost:5000/destination",{cache:"no-store"})
+    const res = await fetch("http://localhost:5000/destination")
    const destinations=await res.json()
 //    console.log(destinations);
     return (

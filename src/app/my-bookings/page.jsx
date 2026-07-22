@@ -11,7 +11,7 @@ const MyBookingPage = async() => {
   const session = await auth.api.getSession({
     headers: await headers(), 
   });
- const {id}=session?.user
+ const id=session?.user
 //  console.log("params.id",user)
  
 

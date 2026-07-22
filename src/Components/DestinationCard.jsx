@@ -8,7 +8,7 @@ import { LuExternalLink } from "react-icons/lu";
 
 const DestinationCard = ({destination}) => {
     const {_id, imageUrl, price, destinationName, duration, country } = destination;
-    // console.log("get destinaiotn",destination);
+        // console.log("get destinaiotn",destination);
     return (
       <div className="border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden bg-white">
         <Image

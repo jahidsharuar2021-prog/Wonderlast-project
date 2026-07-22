@@ -15,7 +15,6 @@ const BookingCard = ({destination}) => {
 
   const[departureDate,setDepartureDate]=useState(null);
   
-
    const {
      description,
      _id,
@@ -38,14 +37,17 @@ const BookingCard = ({destination}) => {
       country,
       departureDate: new Date(departureDate),
     };
-    const res =await fetch("http://localhost:5000/booking",
-      {
-        method:"POST",
-        headers:{
-          "content-type":'application/json'
-        },
-        body:JSON.stringify(bookingData)
-      } );
+     const { data: tokenData } = await authClient.token();
+     console.log("booking card=>", tokenData);
+
+    const res = await fetch("http://localhost:5000/booking", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${tokenData.token}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingData.token),
+    });
       const data= await res.json();
       console.log(data);
       

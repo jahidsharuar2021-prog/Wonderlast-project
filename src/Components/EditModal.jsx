@@ -1,8 +1,10 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Envelope } from "@gravity-ui/icons";
 import {Select, Button, FieldError, Input, Label, Modal, Surface, TextField, ListBox, TextArea } from "@heroui/react";
 import { BiEdit } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 export function EditModal ({destination}) {
  
@@ -24,9 +26,13 @@ export function EditModal ({destination}) {
     const destination = Object.fromEntries(formData.entries());
     console.log(destination);
 
+
+  
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/destination/${id}`, {
       method: "PATCH",
       headers: {
+     authorization: `Bearer ${tokenData.token}`,
         "content-type": "application/json",
       },
       body: JSON.stringify(destination),
@@ -34,7 +40,7 @@ export function EditModal ({destination}) {
 
     const data = await res.json();
    window.location.reload()
-    alert("data is added..!");
+  toast.success("Data is added successfully !")
   };
 
   return (

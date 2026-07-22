@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { TrashBin } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
@@ -18,14 +19,17 @@ export function DeleteAlert({ destination }) {
     departureDate,
   } = destination;
 
-
+  
    const handleDelete= async()=>{
-    const res =await fetch(`http://localhost:5000/destination/${id}`,{
-      method:'DELETE',
-      headers:{
-      "content-type":"applicaion/json"
+    
+   const { data: tokenData } = await authClient.token();
+    const res = await fetch(`http://localhost:5000/destination/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${tokenData.token}`,
+        "content-type": "applicaion/json",
       },
-    })
+    });
     const data=await res.json()
    redirect('/destination');
     console.log(data)

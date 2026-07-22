@@ -13,11 +13,18 @@ const MyBookingPage = async() => {
   });
  const id=session?.user
 //  console.log("params.id",user)
+    const{ token}=await auth.api.getToken({
+      headers:await headers()})
+      console.log("My booking page",token)
  
 
- const res = await fetch(`http://localhost:5000/booking/${id}`);
+ const res = await fetch(`http://localhost:5000/booking/${id}`,{
+    headers:{
+      authorization:`Bearer ${token}`
+    }
+ });
  const bookings=await res.json();
-//  console.log("From user hote",bookings);
+ console.log("From user hote",bookings);
 
     return (
       <div className="max-w-7xl mx-auto">
@@ -27,7 +34,7 @@ const MyBookingPage = async() => {
           {bookings.map((booking) => (
             <div key={booking._id} className="flex gap-5 border p-5 min-w-3xl">
               <Image
-                src={booking.imageUrl}
+                src={booking?.imageUrl}
                 alt={booking.destinationName}
                 height={200}
                 width={200}
